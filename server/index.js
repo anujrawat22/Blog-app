@@ -29,10 +29,7 @@ const options = {
 const openapiSpecification = swaggerJsdoc(options);
 
 app.use(express.json())
-app.use(cors({
-    "origin": "*",
-}
-))
+app.use(cors("*"))
 app.use(cookieParser())
 app.get("/api", (req, res) => {
     res.redirect('/api-docs')
