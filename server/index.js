@@ -19,7 +19,7 @@ const options = {
         },
         servers: [
             {
-                url: 'https://blog-app-2gw0.onrender.com/', // Your base URL
+                url: 'https://blog-o22i.onrender.com', // Your base URL
             },
         ],
     },
@@ -31,6 +31,10 @@ const openapiSpecification = swaggerJsdoc(options);
 app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
+app.get("/api", (req, res) => {
+    res.redirect('/api-docs')
+    res.status(200).send('<h1>Welcome to blog application backend</h1>')
+})
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use("/api/users", UserRouter)
 app.use("/api/posts", PostRouter)
