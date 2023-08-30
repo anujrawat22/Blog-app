@@ -4,7 +4,7 @@ exports.commentsofPost = async (req, res) => {
     const { postId } = req.params;
     try {
 
-        const comments = await Comment.find({ post: postId }).populate('author','username')
+        const comments = await Comment.find({ post: postId }).populate('author', 'username')
         res.status(200).send({ msg: `Comments of post with id - ${postId}`, data: comments })
     } catch (error) {
         console.log(`Error getting comments of postid - ${postId} :`, error);
@@ -34,6 +34,7 @@ exports.createComment = async (req, res) => {
     try {
         const comment = new Comment({ post, author: userId, text })
         await comment.save()
+        comment.populate("author", 'username')
         res.status(201).send({ msg: "Comment created succesfully", data: comment })
     } catch (error) {
         console.log("Error creating the comment : ", error);
