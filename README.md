@@ -24,10 +24,10 @@
        Sweet alert
 
    #### Backend
-        Node.js
-        Express.js
-        MongoDB
-        Mongoose
+       Node.js
+       Express.js
+       MongoDB
+       Mongoose
 
   #### Documentation
        Swagger
