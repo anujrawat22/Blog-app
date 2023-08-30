@@ -19,7 +19,7 @@ const options = {
         },
         servers: [
             {
-                url: 'https://blog-o22i.onrender.com', // Your base URL
+                url: 'https://lazy-gold-prawn.cyclic.app', // Your base URL
             },
         ],
     },
