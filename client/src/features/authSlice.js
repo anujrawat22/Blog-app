@@ -16,6 +16,7 @@ const initialState = {
     role: null,
 };
 
+
 export const loginUser = createAsyncThunk("/users/login", async ({ data, extra: navigateCallback }) => {
     try {
         const response = await axios.post(`${apiurl}/users/login`, {

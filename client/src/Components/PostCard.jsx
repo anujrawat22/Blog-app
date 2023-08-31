@@ -13,7 +13,7 @@ const PostCard = ({ title, content, _id }) => {
                 <p>{content}</p>
             </div>
             <div style={{ height: 'auto', display: 'flex', alignItems: "center", columnGap: '15px' }}>
-                <button className='button'>Edit</button>
+                <button className='button' >Edit</button>
                 <button className='button' onClick={() => dispatch(deletePost(_id))}>Delete</button>
             </div>
             

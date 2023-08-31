@@ -72,6 +72,12 @@ export const searchPosts = createAsyncThunk('/posts/search', async ({ title, aut
 });
 
 
+export const updatePosts = createAsyncThunk("posts/update",
+async()=>{
+
+})
+
+
 const postSlice = createSlice({
     name: 'posts',
     initialState,
