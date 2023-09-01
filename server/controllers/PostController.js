@@ -68,7 +68,8 @@ exports.updatepost = async (req, res) => {
         post.title = title
         post.content = content
         await post.save()
-        res.status(204).send({ msg: "Post updated" })
+        await post.populate('author', 'username')
+        res.status(200).send({ msg: "Post updated", post })
     } catch (error) {
         console.log(`Error updating post with  id - ${id} :`, error);
         res.status(500).send({ err: "Server error" })

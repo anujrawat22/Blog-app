@@ -45,10 +45,11 @@ exports.login = async (req, res) => {
         if (!verify) {
             return res.status(401).send({ err: "Invalid Credentials" })
         }
-        const token = jwt.sign({ userId: user._id, role: user.role, username: user.username }, secretkey, { expiresIn: 60 * 60 * 24 * 7 })
+        const token = jwt.sign({ userId: user._id, role: user.role }, secretkey, { expiresIn: 60 * 60 * 24 * 7 })
 
         res.cookie('token', token, {
-            maxAge: 3600 * 1000 * 24 * 7
+            maxAge: 3600 * 1000 * 24 * 7,
+            httpOnly: true,
         })
         res.status(200).send({ msg: "Login Successfull", token, role: user.role, user: user.username })
     } catch (error) {
@@ -71,4 +72,22 @@ exports.getuserdetails = async (req, res) => {
 exports.logout = (req, res) => {
     res.clearCookie('token')
     res.status(204).send({ msg: "User logged out" })
+}
+
+exports.autoLogin = async (req, res) => {
+    const id = req.userId
+    try {
+        const user = await User.findById(id).select('-password')
+        if (!user) {
+            res.status(404).send({ err: "User not found" })
+        }
+        const token = jwt.sign({ userId: user._id, role: user.role }, secretkey, { expiresIn: 60 * 60 * 24 * 7 })
+        res.cookie('token', token, {
+            maxAge: 3600 * 1000 * 24 * 7,
+            httpOnly: true,
+        })
+        res.status(200).send({ msg: "Login successful", token, role: user.role, user: user.username })
+    } catch (error) {
+
+    }
 }

@@ -1,6 +1,7 @@
 const { Router } = require("express")
-const { signup, login, getuserdetails, logout } = require("../controllers/UserController")
+const { signup, login, getuserdetails, logout, autoLogin } = require("../controllers/UserController")
 const cookieParser = require('cookie-parser');
+const { authenticate } = require("../middlewares/authenticateMiddleware");
 
 const UserRouter = Router()
 UserRouter.use(cookieParser())
@@ -81,5 +82,7 @@ UserRouter.post("/login", login)
 UserRouter.get("/logout", logout)
 
 UserRouter.get("/userdetails/:id", getuserdetails)
+
+UserRouter.get("/me", authenticate, autoLogin)
 
 module.exports = { UserRouter }

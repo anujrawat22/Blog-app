@@ -84,6 +84,18 @@ export const Logout = createAsyncThunk("users/logout", async (_, { dispatch }) =
     }
 })
 
+export const autoLogin = createAsyncThunk('auth/autoLogin', async ({ token, navigateCallback }) => {
+    try {
+        const response = await axios.get(`${apiurl}/users/me`, {
+            headers: { Authorization: `bearer ${token}` }
+        })
+        navigateCallback(response.data)
+        return response.data;
+    } catch (error) {
+        throw error.response.data.err;
+    }
+})
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -111,6 +123,20 @@ const authSlice = createSlice({
                 state.loading = false
             })
             .addCase(loginUser.rejected, (state, action) => {
+                state.error = action.error.message
+            })
+            .addCase(autoLogin.pending, (state) => {
+                state.loading = true
+            })
+            .addCase(autoLogin.fulfilled, (state, action) => {
+                state.isAuthenticated = true
+                state.loading = false;
+                state.role = action.payload.role;
+                state.user = action.payload.username;
+                state.loading = false;
+                state.token = action.payload.token
+            })
+            .addCase(autoLogin.rejected, (state, action) => {
                 state.error = action.error.message
             })
     }

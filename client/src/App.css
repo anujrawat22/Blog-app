@@ -16,3 +16,11 @@ a {
 .button:hover {
   cursor: pointer;
 }
+
+.editModal {
+  padding: 30px;
+  display:  flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { selectToken } from './authSlice';
+import Swal from 'sweetalert2';
 
 
 
@@ -10,7 +11,8 @@ const initialState = {
     posts: [],
     selectedPost: null,
     status: 'idle',
-    error: null
+    error: null,
+    loading: false
 }
 
 
@@ -45,7 +47,6 @@ export const createNewPost = createAsyncThunk(`posts/create`, async (post, { get
 
 export const deletePost = createAsyncThunk("posts/delete", async (id, { getState }) => {
     const token = selectToken(getState());
-    console.log(token)
     try {
         await axios.delete(`${apiurl}/posts/delete/${id}`, {
             headers: { Authorization: `bearer ${token}` }
@@ -73,9 +74,23 @@ export const searchPosts = createAsyncThunk('/posts/search', async ({ title, aut
 
 
 export const updatePosts = createAsyncThunk("posts/update",
-async()=>{
-
-})
+    async ({ title, content, id }, { getState }) => {
+        const token = selectToken(getState());
+        try {
+            const response = await axios.put(`${apiurl}/posts/update/${id}`, { title, content }, { headers: { Authorization: `bearer ${token}` } })
+            Swal.fire(
+                {
+                    title: "Post update",
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: false
+                }
+            )
+            return response.data.post
+        } catch (error) {
+            throw error.response.data.err
+        }
+    })
 
 
 const postSlice = createSlice({
@@ -138,7 +153,23 @@ const postSlice = createSlice({
             .addCase(searchPosts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            .addCase(updatePosts.pending, (state) => {
+                state.loading = true
+            }
+            )
+            .addCase(updatePosts.fulfilled, (state, action) => {
+                const updatePost = action.payload
+                const index = state.posts.findIndex(post => post._id === updatePost._id)
+
+                if (index !== -1) {
+                    state.posts[index] = updatePost
+                }
+                state.loading = false;
+            })
+            .addCase(updatePosts.rejected, (state, action) => {
+                state.error = action.error.message
+            })
 
     },
 })
