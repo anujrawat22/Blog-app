@@ -54,12 +54,12 @@
 
 ## Dummy credentials
    #### Author
-        email - 
-        password - 
+        email - anujrawat@gmail.com  
+        password - anujrawat
 
    #### Reader 
-        email - 
-        password -
+        email - arunrawat@gmail.com
+        password - arunrawat
 
 
 ## App presentation video 
