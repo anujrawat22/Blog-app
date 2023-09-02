@@ -34,7 +34,7 @@ exports.createComment = async (req, res) => {
     try {
         const comment = new Comment({ post, author: userId, text })
         await comment.save()
-        comment.populate("author", 'username')
+        await comment.populate("author", 'username')
         res.status(201).send({ msg: "Comment created succesfully", data: comment })
     } catch (error) {
         console.log("Error creating the comment : ", error);
