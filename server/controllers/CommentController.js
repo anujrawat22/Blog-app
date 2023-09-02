@@ -71,6 +71,7 @@ exports.deleteComment = async (req, res) => {
         if (!comment) {
             return res.status(404).send({ err: "Comment not found for the user" })
         }
+        await Comment.findByIdAndDelete(id)
         res.status(204).send({ msg: "Commented deleted succesfully" })
     } catch (error) {
         console.log(`Error deleting the comment :`, error);

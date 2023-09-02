@@ -1,4 +1,5 @@
 
+const { Comment } = require("../models/CommentModel");
 const { Post } = require("../models/PostModel");
 const { User } = require("../models/UserModel");
 
@@ -86,6 +87,7 @@ exports.deletepost = async (req, res) => {
             return res.status(404).send({ err: "No post of the author found" })
         }
         await Post.findByIdAndDelete(id)
+        await Comment.deleteMany({post : id})
         res.status(204).send({ msg: `Post with id - ${id} deleted successfully` })
     } catch (error) {
         console.log(`Error deleting post with id - ${id} :`, error);
