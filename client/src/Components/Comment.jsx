@@ -1,13 +1,15 @@
-import { Stack, Typography } from '@mui/material'
+
 import React from 'react'
 
-const Comment = ({ text, author }) => {
+const Comment = (props) => {
+ 
   return (
-    <Stack direction="row">
-      <Typography variant='subtitle2'>
-        {author.username}<span style={{color : "gray",marginLeft : "10px"}}>{text}</span>
-      </Typography>
-    </Stack>
+   <div className='comment'>
+    <div style={{ width : '50%'}}>
+    <h4 style={{color : "#1976d2"}}>{props.author.username}  <span style={{marginLeft : '2%',fontSize : '13px' ,color : "GrayText"}}>{props.text}</span></h4>
+    </div>
+    <h6 style={{color : "GrayText"}}>{props.createdAt.split("T")[0].split("-").reverse().join("-")}</h6>
+   </div>
   )
 }
 

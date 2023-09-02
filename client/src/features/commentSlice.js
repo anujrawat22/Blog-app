@@ -21,11 +21,15 @@ export const addComment = createAsyncThunk(
     '/comments/addComment',
     async (data, { getState }) => {
         const token = selectToken(getState())
-        console.log(token)
-        const response = await axios.post(`${apiurl}/comments/create`, data, {
-            headers: { Authorization: `bearer ${token}` }
-        });
-        return response.data.data;
+        try {
+            const response = await axios.post(`${apiurl}/comments/create`, data, {
+                headers: { Authorization: `bearer ${token}` }
+            });
+            console.log(response)
+            return response.data.data;
+        } catch (error) {
+            throw error.response.data.err
+        }
     }
 );
 
@@ -59,6 +63,7 @@ const commentSlice = createSlice({
             })
             .addCase(addComment.fulfilled, (state, action) => {
                 state.comments.push(action.payload);
+                state.loading = false;
             })
             .addCase(addComment.rejected, (state, action) => {
                 state.error = action.error.message

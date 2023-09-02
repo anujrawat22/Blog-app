@@ -1,8 +1,8 @@
-import React, { useEffect,  useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchPostDetails } from '../features/postSlice';
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Button, Chip, Container, Divider, Stack, TextField, Typography } from '@mui/material';
 import { addComment, fetchCommentForPost } from '../features/commentSlice';
 import Comment from '../Components/Comment';
 
@@ -38,13 +38,15 @@ const Post = () => {
     }
   }
 
+
   return (
-    <div style={{ width: '50dvw', margin: "auto", marginTop: '5dvh', boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",padding : "2dvh"}}>
+    <div  className='postDiv'>
       <Container maxWidth="m">
         <Stack direction="column" spacing={4}>
-          <Typography variant="h5">{selectedPost.title}</Typography>
-          <Typography>{selectedPost.content}</Typography>
-          <Typography variant="h6">Comments</Typography>
+          <Typography variant="h5" color={'#1976d2'}>{selectedPost.title}</Typography>
+          <Divider></Divider>
+          <Typography color={'#808080'}>{selectedPost.content}</Typography>
+          <Divider ><Chip label="COMMENTS" /></Divider>
           <Stack direction="column" spacing={2}>
             {
               comments.length > 0 ?

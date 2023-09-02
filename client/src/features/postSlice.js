@@ -19,6 +19,7 @@ const initialState = {
 
 
 export const fetchAllPosts = createAsyncThunk("/posts/getPosts", async ({ page, order }) => {
+    console.log(page)
     const response = await axios.get(`${apiurl}/posts/getPosts?page=${page}&order=${order}`)
     return response.data.data
 })

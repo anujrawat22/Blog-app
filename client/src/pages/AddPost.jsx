@@ -1,6 +1,6 @@
 import { Button, Container, Stack, TextField, Typography } from '@mui/material'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import withReactContent from 'sweetalert2-react-content'
 const AddPost = () => {
   const MySwal = withReactContent(Swal)
   const navigate = useNavigate()
-  const { token, role } = useSelector(state => state.auth);
+  const { token } = useSelector(state => state.auth);
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: { errors } } = useForm()
 
@@ -32,7 +32,7 @@ const AddPost = () => {
   }
 
   return (
-    <div style={{ margin: "auto", width: "30dvw", height: "auto", marginTop: "10dvh", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", padding: "2rem 0", borderRadius: "5%" }} >
+    <div style={{ margin: "auto", height: "auto", marginTop: "10dvh",  padding: "2rem 0" }} className='Addpost_div'>
       <Typography variant="h4" textAlign={"center"}>
         Add new Post
       </Typography>

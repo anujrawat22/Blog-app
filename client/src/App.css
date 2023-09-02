@@ -19,8 +19,91 @@ a {
 
 .editModal {
   padding: 30px;
-  display:  flex;
+  display: flex;
   flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
+  position: fixed;
+  width: 40dvw;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  z-index: 5;
+  margin: auto;
 }
 
+.Addpost_div {
+  width: 30dvw;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+.Manage {
+  width: 80dvw;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: space-around;
+  height: auto;
+  row-gap: 50px;
+}
+
+.AllPosts{
+  min-height: 300px;
+  width: 80dvw;
+  margin: auto;
+  margin-top: 5dvh;
+  height: auto;
+  display:  flex;
+  flex-wrap: wrap;
+  padding: 2%;
+  column-gap: 5%;
+  row-gap: 50px;
+}
+
+.postDiv{
+  width: 50dvw;
+  margin: auto;
+  margin-top: 5dvh;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 2dvh;
+}
+.comment{
+  display:  flex;
+  justify-content: space-between;
+}
+
+/*  */
+/*  */
+/*  */
+
+/* Media queries */
+@media screen and (max-width: 900px) {
+  .Addpost_div {
+    width: 50dvw;
+  }
+
+  .editModal{
+    width: 60dvw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Addpost_div {
+    width: 80dvw;
+  }
+
+  .Manage {
+    width: 100dvw;
+  }
+  
+  .editModal{
+    width: 80dvw;
+  }
+
+  .AllPosts{
+    width: 80dvw;
+  }
+}

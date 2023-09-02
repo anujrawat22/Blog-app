@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { fetchAllPosts, searchPosts } from '../features/postSlice';
-import { Pagination, Stack, TextField, Typography } from '@mui/material';
+import { Pagination, Stack, TextField } from '@mui/material';
 import UserPostCard from '../Components/UserPostCard';
 
 
@@ -16,7 +15,7 @@ const Allposts = () => {
   const [order, setOrder] = useState(0)
   const posts = useSelector(state => state.posts.posts)
 
-  
+
 
   const handletitlesearch = (e) => {
     setTitle(e.target.value)
@@ -48,7 +47,7 @@ const Allposts = () => {
           SelectProps={{
             native: true,
           }}
-          helperText="Please posts by date"
+          helperText="Posts by date"
           onChange={(e) => {
             setOrder(e.target.value)
             setCurrentPage(1)
@@ -61,14 +60,14 @@ const Allposts = () => {
         </TextField>
       </div>
     </div>
-    <div style={{ width: "80dvw", margin: 'auto', marginTop: '5dvh', height: 'auto', display: "grid", gridTemplateColumns: "repeat(3,1fr)", gridTemplateRows: "repeat auto", justifyContent: "space-around", rowGap: '30px' }}>
+    <div  className='AllPosts'>
 
       {
         posts.length > 0 ? posts.map((el) => {
           return <UserPostCard key={el._id} {...el} />
         })
           :
-          <Typography variant='h5'>No Posts to Show</Typography>
+          <h1 style={{textAlign : 'center',display : 'block',width : '80dvw'}}>No Posts to Show</h1>
       }
     </div>
     <div style={{ margin: 'auto', display: 'flex', justifyContent: "center", padding: '5%' }} >
@@ -76,7 +75,7 @@ const Allposts = () => {
         <Pagination count={10} color="primary" defaultPage={currentPage}
           onChange={(e, value) => {
             setCurrentPage(value)
-            dispatch(fetchAllPosts(value))
+            dispatch(fetchAllPosts({ page: value, order }))
           }
           } />
       </Stack>

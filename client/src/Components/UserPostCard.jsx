@@ -13,11 +13,11 @@ const UserPostCard = ({ title, content, _id, author }) => {
     }
 
     return (
-        <Card sx={{ minWidth: 300, maxWidth: 350, p: 2 }}  >
-            <CardContent>
+        <Card sx={{ minWidth: 300, maxWidth: 300,maxHeight : 400, p: 2 }}  >
+            <CardContent >
                 <Typography variant="h5" color="#1976d2">{title}</Typography>
                 <Typography sx={{ mb: 2 }} variant='subtitle1' color="text.secondary">{author.username}</Typography>
-                <Typography variant="body2" color="text.primary">{content}</Typography>
+                <Typography variant="body2" color="text.primary" overflow={'scroll'} className='content' maxHeight={250}>{content}</Typography>
             </CardContent>
             <CardActions>
                 <Button variant='outlined' onClick={() => viewpost(_id)}>Show Post</Button>

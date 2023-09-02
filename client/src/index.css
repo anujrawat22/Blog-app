@@ -15,3 +15,7 @@ code {
 .postcardContent::-webkit-scrollbar {
   display: none;
 }
+
+.content::-webkit-scrollbar {
+  display: none;
+}

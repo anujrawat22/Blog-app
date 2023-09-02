@@ -7,14 +7,13 @@ import { fetchUserPosts } from '../features/postSlice';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from 'react-router-dom';
 import EditModel from '../Components/EditModel';
-import { FlashlightOffRounded } from '@mui/icons-material';
+
 
 const ManagePost = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const dispatch = useDispatch()
   const { token } = useSelector(state => state.auth);
   const [EditData, setEditData] = useState({ title: '', content: '', id: '' })
-  const posts = useSelector(state => state.posts.posts)
 
   const fetchPosts = () => {
     dispatch(fetchUserPosts(token))
@@ -23,6 +22,7 @@ const ManagePost = () => {
     fetchPosts()
   }, [dispatch])
 
+  const posts = useSelector(state => state.posts.posts)
 
   const openModal = () => {
     setModalOpen(true)
@@ -35,8 +35,7 @@ const ManagePost = () => {
 
   return (
     <>
-
-      <div style={{ display: "flex", flexWrap: "wrap", margin: 'auto', marginTop: "5dvh", width: "80dvw", justifyContent: "space-around", height: "auto", rowGap: '50px' }}>
+      <div style={{ display: "flex", flexWrap: "wrap", margin: 'auto', marginTop: '5dvh' }} className='Manage'>
         {
           posts.length > 0 ? posts.map((el) => {
             return <PostCard key={el._id} {...el} openModal={openModal} setEditData={setEditData} />

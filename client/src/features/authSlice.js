@@ -132,7 +132,7 @@ const authSlice = createSlice({
                 state.isAuthenticated = true
                 state.loading = false;
                 state.role = action.payload.role;
-                state.user = action.payload.username;
+                state.user = action.payload.user;
                 state.loading = false;
                 state.token = action.payload.token
             })
